@@ -24,14 +24,12 @@ A test QueScript file
 
 ## Installation
 
-This package is not published in the Atom Package Repository. 
+This package is published in the Atom Package Repository. 
 
 * install package [linter-autocomplete-jing](https://github.com/aerhard/linter-autocomplete-jing) and its dependencies under Atom > Settings.
 * install package [xml-common-schemata](https://atom.io/packages/xml-common-schemata) under Atom > Settings.
-* clone this project from GitHub and place it inside the `.atom/packages` - folder
-* run `apm link` inside the terminal from the project's root directory.
+* install this package under  Atom > Settings > Install and search for `atom_quescript_package`.
 
- 
 
 ## Notes
 
