@@ -1,6 +1,6 @@
 {
   "name": "atom_QueScript_package",
-  "version": "0.3.0",
+  "version": "0.3.2",
   "description": "Atom Package providing XML Grammar and Validation Rules for QueScript",
   "keywords": [],
   "repository": "https://github.com/maybites/atom_QueScript_package",
