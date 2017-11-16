@@ -1,0 +1,16 @@
+'.text.xml':
+  'validation':
+    'rules': [
+      {
+        priority: 1
+        test:
+          grammarScope: "text.xml.quescript"
+        outcome:
+          schemaProps: [
+            {
+              lang: "xsd"
+              path: "../schemata/quescript.xsd"
+            }
+          ]
+      }
+    ]
