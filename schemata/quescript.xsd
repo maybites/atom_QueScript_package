@@ -288,10 +288,11 @@
 </xs:element>
 
 <xs:element name="script">
-	<xs:complexType>
-		<xs:sequence minOccurs="1" maxOccurs="unbounded">
-			<xs:element ref="que"/>
-		</xs:sequence>
+	<xs:complexType mixed="true">
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:element ref="que" minOccurs="1"/>
+			<xs:element ref="var"/>
+		</xs:choice>
 	</xs:complexType>
 </xs:element>
 
