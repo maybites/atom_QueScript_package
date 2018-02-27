@@ -41,6 +41,13 @@
         </xs:restriction>
     </xs:simpleType>
 </xs:attribute>
+<xs:attribute name="scope"> 
+    <xs:simpleType>
+        <xs:restriction base="xs:string">
+           	<xs:pattern value="script|que|local"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:attribute>
 
 <xs:attribute name="fadeto" type="xs:string"/> 
 <xs:attribute name="duration" type="xs:string"/> 
@@ -58,10 +65,9 @@
 <xs:attribute name="until" type="xs:string"/> 
 <xs:attribute name="true" type="xs:string"/> 
 <xs:attribute name="false" type="xs:string"/> 
-<xs:attribute name="repeat" type="xs:string"/> 
-<xs:attribute name="start" type="xs:string"/> 
-<xs:attribute name="step" type="xs:string"/> 
-<xs:attribute name="vardomain" type="xs:string"/> 
+<xs:attribute name="condition" type="xs:string"/> 
+<xs:attribute name="init" type="xs:string"/> 
+<xs:attribute name="next" type="xs:string"/> 
 <xs:attribute name="sendto" type="xs:string" default="default"/> 
 
 <xs:element name="send" type="xs:string"/>
@@ -85,7 +91,7 @@
 <xs:element name="debugger">
 	<xs:complexType>
 		<xs:attribute ref="name"/> 
-		<xs:attribute ref="vardomain"/> 
+		<xs:attribute ref="scope"/> 
 	</xs:complexType>
 </xs:element>
 
@@ -160,52 +166,46 @@
 
 <xs:element name="else">
 	<xs:complexType mixed="true">
-		<xs:sequence>
-			<xs:element ref="var" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:choice minOccurs="0" maxOccurs="unbounded">
-				<xs:element ref="if"/>
-				<xs:element ref="osc"/>
-				<xs:element ref="print"/>
-				<xs:element ref="out"/>
-				<xs:element ref="send"/>
-				<xs:element ref="trigger"/>
-				<xs:element ref="expr"/>
-				<xs:element ref="debugger"/>
-      			<xs:element ref="fade"/>
-      			<xs:element ref="stop"/>
-     			<xs:element ref="shutdown"/>
-     			<xs:element ref="play"/>
-    			<xs:element ref="pause"/>
-   				<xs:element ref="resume"/>
-			</xs:choice>
-		</xs:sequence>
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:element ref="if"/>
+			<xs:element ref="osc"/>
+			<xs:element ref="print"/>
+			<xs:element ref="out"/>
+			<xs:element ref="send"/>
+			<xs:element ref="trigger"/>
+			<xs:element ref="expr"/>
+			<xs:element ref="debugger"/>
+      		<xs:element ref="fade"/>
+      		<xs:element ref="stop"/>
+     		<xs:element ref="shutdown"/>
+     		<xs:element ref="play"/>
+    		<xs:element ref="pause"/>
+   			<xs:element ref="resume"/>
+		</xs:choice>
 	</xs:complexType>
 </xs:element>
 
 <xs:element name="if">
 	<xs:complexType mixed="true">
-		<xs:sequence>
-			<xs:element ref="var" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:choice minOccurs="0" maxOccurs="unbounded">
-				<xs:element ref="if"/>
-				<xs:element ref="print"/>
-				<xs:element ref="out"/>
-				<xs:element ref="send"/>
-				<xs:element ref="osc"/>
-				<xs:element ref="trigger"/>
-				<xs:element ref="expr"/>
-				<xs:element ref="anim"/>
-				<xs:element ref="while"/>
-				<xs:element ref="debugger"/>
-  	    		<xs:element ref="fade"/>
-  	    		<xs:element ref="stop"/>
-  		   		<xs:element ref="shutdown"/>
-  		   		<xs:element ref="play"/>
-  		  		<xs:element ref="pause"/>
-   				<xs:element ref="resume"/>
-				<xs:element ref="else" maxOccurs="1"/>
-			</xs:choice>
-		</xs:sequence>
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:element ref="if"/>
+			<xs:element ref="print"/>
+			<xs:element ref="out"/>
+			<xs:element ref="send"/>
+			<xs:element ref="osc"/>
+			<xs:element ref="trigger"/>
+			<xs:element ref="expr"/>
+			<xs:element ref="anim"/>
+			<xs:element ref="while"/>
+			<xs:element ref="debugger"/>
+  	   		<xs:element ref="fade"/>
+      		<xs:element ref="stop"/>
+  	   		<xs:element ref="shutdown"/>
+  	   		<xs:element ref="play"/>
+  	  		<xs:element ref="pause"/>
+   			<xs:element ref="resume"/>
+			<xs:element ref="else" maxOccurs="1"/>
+		</xs:choice>
 	 	<xs:attribute ref="true"/> 
 	 	<xs:attribute ref="false"/> 
 	</xs:complexType>
@@ -213,36 +213,32 @@
 
 <xs:element name="while">
 	<xs:complexType mixed="true">
-		<xs:sequence>
-			<xs:element ref="var" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:choice minOccurs="0" maxOccurs="unbounded">
-				<xs:element ref="if"/>
-				<xs:element ref="print"/>
-				<xs:element ref="out"/>
-				<xs:element ref="send"/>
-				<xs:element ref="osc"/>
-				<xs:element ref="trigger"/>
-				<xs:element ref="expr"/>
-				<xs:element ref="debugger"/>
-      			<xs:element ref="fade"/>
-      			<xs:element ref="stop"/>
-     			<xs:element ref="shutdown"/>
-     			<xs:element ref="play"/>
-    			<xs:element ref="pause"/>
-   				<xs:element ref="resume"/>
-			</xs:choice>
-		</xs:sequence>
-	 	<xs:attribute ref="repeat" use="required"/> 
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:element ref="if"/>
+			<xs:element ref="print"/>
+			<xs:element ref="out"/>
+			<xs:element ref="send"/>
+			<xs:element ref="osc"/>
+			<xs:element ref="trigger"/>
+			<xs:element ref="expr"/>
+			<xs:element ref="debugger"/>
+   			<xs:element ref="fade"/>
+    		<xs:element ref="stop"/>
+   			<xs:element ref="shutdown"/>
+    		<xs:element ref="play"/>
+    		<xs:element ref="pause"/>
+   			<xs:element ref="resume"/>
+		</xs:choice>
+	 	<xs:attribute ref="condition" use="required"/> 
 	 	<xs:attribute ref="name"/> 
-	 	<xs:attribute ref="start"/> 
-	 	<xs:attribute ref="step"/> 
+	 	<xs:attribute ref="init"/> 
+	 	<xs:attribute ref="next"/> 
 	</xs:complexType>
 </xs:element>
 
 <xs:element name="anim">
 	<xs:complexType mixed="true">
 		<xs:sequence>
-			<xs:element ref="var" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element ref="keys" minOccurs="0" maxOccurs="1"/>
 			<xs:choice minOccurs="0" maxOccurs="unbounded">
 				<xs:element ref="track"/>
